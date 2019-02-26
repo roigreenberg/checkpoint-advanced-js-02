@@ -6,14 +6,16 @@
 
 
         let num = 4;
+
         new Promise(
             (resolve, reject) => { num == 4 ? resolve("ok") : reject("not ok") }
         )
             .then(
                 (x) => {
                     console.log(x);
-                    return 100;
+                     return 100;
                 }
+
             )
             .then(
                 (z) => {
@@ -21,7 +23,7 @@
                 }
             )
             .catch(
-                (y) => { console.log(y); }
+                (y) => { console.log("I got: " + y); }
             )
 
         /*
