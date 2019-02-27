@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- <button type="button" onclick="addItem()">Click Me!</button> -->
+<script>
+    // items = {}
+    // function addItem() {
+    //     let value=prompt("Add new item")
+    //     console.log(value)
+    //     items[Symbol("item")] = value
+    //     items[value] = true
+    //     console.log(items)
+    //     console.log(JSON.stringify(items))
+    // }
+
+    "use strict"
+    let collage = {
+        name: 'JB',
+        address: 'Tel Aviv',
+        // describe: function () {
+        //     return `collage describe name: ${this.name}`;
+        // },
+    };
+
+    collage.age = 50
+
+    Object.defineProperty(collage, 'age', {
+        value: 456,
+        // writable: false,
+        configurable: false,
+        // enumerable: false
+    });
+
+    collage.key1 = "asd"
+
+    Object.defineProperty(collage, 'key1', {
+        value: 456,
+        // writable: false,
+        // configurable: false,
+        enumerable: false
+    });
+
+    collage.age = 500
+
+    console.log(JSON.stringify(collage)) 
+
+    Object.keys(collage).forEach(key => {
+        console.log(Object.getOwnPropertyDescriptor(collage, key))
+    });
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

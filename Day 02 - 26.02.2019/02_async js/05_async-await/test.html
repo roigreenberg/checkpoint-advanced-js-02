@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+    
+    function b (){
+        for(let i=0;i<10**10;i++);
+        console.log("hi");
+        
+    }
+
+    function p (){
+        new Promise((x, y)=>x()).then(()=>{
+            for (let i=0;i<10**10;i++);
+            console.log("hi")
+        })
+        
+    }
+    
+   
+    </script>
+</head>
+<body>
+    <input>
+    <button onclick="b()">b</button>
+    <button onclick="p()">p</button>
+
+</body>
+</html>

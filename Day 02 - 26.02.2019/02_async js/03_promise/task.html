@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        console.log("0 " + Date.now());
+        // new Promise((resolve, reject) => {setTimeout(resolve, 4000)})
+        // .then(()=>{
+        //     console.log("4 " + Date.now());
+        //     return new Promise((resolve, reject) => {setTimeout(resolve, 3000)})
+        // })
+        // .then(()=>{
+        //     console.log("3 " + Date.now());
+        //     return new Promise((resolve, reject) => {setTimeout(resolve, 1000)})
+        // })
+        // .then(()=>{
+        //     console.log("1 " + Date.now());
+        //     return new Promise((resolve, reject) => {setTimeout(resolve, 5000)})
+        // })
+        // .then(()=>{
+        //     console.log("5 " + Date.now());
+        // })
+
+
+
+        new Promise((resolve, reject) => {resolve()})
+        .then(()=>{
+            console.log("q " + Date.now());
+            return 100
+        })
+        .then((a)=>{
+            console.log(a +" "+ Date.now());
+        })
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

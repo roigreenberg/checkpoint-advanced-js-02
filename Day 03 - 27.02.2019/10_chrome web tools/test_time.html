@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        var arr = []
+        let sum = 0;
+        let size = 10**5
+        for (let i=0; i < size; arr.push(i++));
+
+        
+        console.time("test 1");
+        for (x of arr) sum += x
+        console.timeEnd("test 1");
+        sum = 0;
+        console.time("test 1");
+        for (x in arr) sum += x
+        console.timeEnd("test 1");
+        sum = 0;
+        console.time("test 2");
+        for (let i=0; i < size; sum+=arr[i++]);
+        console.timeEnd("test 2");
+        sum = 0;
+        console.time("test 3");
+        for (let i=0; i < size; i++) sum+=arr[i];
+        console.timeEnd("test 3");
+
+
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

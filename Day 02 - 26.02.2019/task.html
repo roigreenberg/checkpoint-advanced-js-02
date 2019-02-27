@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+    function saveInfo(){
+        console.log("saveInfo")
+        let info = {
+            "name":document.getElementById("name").value,
+            "age":document.getElementById("age").value,
+            "bdate":document.getElementById("bdate").value,
+            "color":document.getElementById("color").value
+        }
+        
+        let history = JSON.parse(localStorage.getItem("history"))
+        if (history==null){
+            history = []
+        }
+        history.push(info)
+        history_str = JSON.stringify(history)
+        localStorage.setItem("history", history_str)
+
+        let list = document.getElementById("history")
+ 
+        var entry = document.createElement('li');
+        entry.style.color = info.color
+        entry.appendChild(document.createTextNode(info.name + ", " + info.age + ", " + info.bdate));
+    
+        list.appendChild(entry);
+
+    }
+
+    function clearHistory(){
+        console.log("clear history")
+        localStorage.removeItem("history")
+        location.reload();
+    }
+
+    function loadHistory(){
+        console.log("load history")
+        let history = JSON.parse(localStorage.getItem("history"))
+        if (history==null){
+            return
+        }
+        let list = document.getElementById("history")
+
+        history.forEach(info => {
+            var entry = document.createElement('li');
+            entry.style.color = info.color
+            entry.appendChild(document.createTextNode(info.name + ", " + info.age + ", " + info.bdate));
+            list.appendChild(entry);
+        })
+    }
+
+    </script>
+</head>
+<body onload="loadHistory()">
+    <h2>Text Input</h2>
+
+    <form>
+    Name:
+    <input type="text" id="name">
+    <br><br>
+    Age:
+    <input type="number" id="age">
+    <br><br>
+    Birth Date:
+    <input type="date" id="bdate" value="dd/mm/yy">
+    <br><br>
+    Prefered color:
+    <input type="color" id="color" value="#ff0000" style="width:10;">
+
+    </form>
+
+    <button onclick="saveInfo()">save</button>
+
+    
+    <ol id="history"></ol>
+
+    <button onclick="clearHistory()">clear</button>
+
+
+</body>
+</html>

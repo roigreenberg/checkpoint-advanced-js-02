@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    /* Create three equal columns that floats next to each other */
+    .column {
+        float: left;
+        padding: 10px;
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+<head>
+    <title>CRUD</title>
+    <script>
+
+    function clearResult(){
+        document.getElementById('res').innerHTML = "";
+    }
+
+    async function showUser(){}
+    
+    async function getUsers() {
+        try {
+            let pageNum = 1
+            var resJson
+            clearResult()
+            do {
+            let res = await fetch(`https://reqres.in/api/users?page=${pageNum}`)
+            console.log(res);
+            resJson = await res.json()
+            console.log(resJson);
+            let data = resJson.data
+
+            if (res.status == 200){
+                
+    
+                var divRes = document.getElementById("res")
+                var rowDiv = document.createElement('div');
+                rowDiv.className = "row"
+                data.forEach(user=>{
+                    console.log(user);
+                    var colDiv = document.createElement('div');
+                    colDiv.className = "column"
+                    
+
+                    var para = document.createElement("P");
+                    var t = document.createTextNode(`${user.id}: ${user.first_name} ${user.last_name}`); 
+                    para.appendChild(t);
+                    colDiv.appendChild(para); 
+
+                    var img = document.createElement('img');
+                    img.src = user.avatar
+                    colDiv.appendChild(img);
+                    rowDiv.appendChild(colDiv)
+
+                })
+                divRes.appendChild(rowDiv)
+            }
+            pageNum++
+            } while (pageNum <= resJson.total_pages)
+        }
+        catch (rejectValue) {
+            console.log(rejectValue);
+        }
+    }
+
+    async function postUser() {
+        var name = prompt("Choose a name");
+        var job = prompt("Choose a job");
+        const rawResponse = await fetch('https://reqres.in/api/users', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name, job})
+        });
+        console.log(rawResponse);
+        const content = await rawResponse.json();
+
+        console.log(content);        
+    }
+
+    async function putUser() {
+        var id = prompt("Choose an id");
+        var name = prompt("Choose a name");
+        var job = prompt("Choose a job");
+        const rawResponse = await fetch(`https://reqres.in/api/users/${id}`, {
+            method: 'PUT',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name, job})
+        });
+        console.log(rawResponse);
+        const content = await rawResponse.json();
+
+        console.log(content);        
+    }
+    
+    async function delUser() {
+        var id = prompt("Choose an id");
+
+        const rawResponse = await fetch(`https://reqres.in/api/users/${id}`, {
+            method: 'DELETE',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+        });
+        console.log(rawResponse);      
+    }
+
+    </script>
+</head>
+<body>
+    <button onclick="getUsers()">get users</button>
+    <button onclick="postUser()">add user</button>
+    <button onclick="putUser()">edit user</button>
+    <button onclick="delUser()">delete user</button>
+
+    <div id="res"></div>
+</body>
+</html>
